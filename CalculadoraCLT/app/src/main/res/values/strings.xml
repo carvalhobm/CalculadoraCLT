@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Calculadora CLT</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="rescisao">Rescisão</string>
+    <string name="ferias">Férias</string>
+    <string name="sal_liquido">Sal. Líquido</string>
+
+</resources>

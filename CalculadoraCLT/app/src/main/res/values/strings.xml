@@ -9,8 +9,20 @@
     <string name="sal_bruto_cifra">Salário Bruto (R$)</string>
     <string name="dependentes">Dependentes</string>
     <string name="outros_descontos">Outros descontos</string>
+    <string name="horas_extras">Médio de horas extras no ano (R$)</string>
+    <string name="dias_usufruidos">Dias usufruidos</string>
+    <string name="abono_pecuniario">Abono pecuniário(Vender 1/3)</string>
+    <string name="adiantar_decimo_terceiro">Adiantar metade do 13º</string>
+    <string name="dt_contratacao">Data de contratação</string>
+    <string name="dt_demissao">Data de demissão</string>
+    <string name="motivo">Motivo</string>
+    <string name="aviso_previo">Aviso prévio</string>
+    <string name="saldo_fgts">Saldo FGTS</string>
+    <string name="ferias_ano_anterior">Possui férias do ano anterior?</string>
 
 
-    <string name="calcular">Calcular</string>
+    <string name="label_calcular">Calcular</string>
+    <string name="label_sim">Sim</string>
+    <string name="label_nao">Não</string>
 
 </resources>

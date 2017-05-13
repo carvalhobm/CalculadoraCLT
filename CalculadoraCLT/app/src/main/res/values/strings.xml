@@ -4,6 +4,13 @@
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="rescisao">Rescisão</string>
     <string name="ferias">Férias</string>
-    <string name="sal_liquido">Sal. Líquido</string>
+    <string name="sal_liquido">Salário Líquido</string>
+    <string name="cifra">(R$)</string>
+    <string name="sal_bruto_cifra">Salário Bruto (R$)</string>
+    <string name="dependentes">Dependentes</string>
+    <string name="outros_descontos">Outros descontos</string>
+
+
+    <string name="calcular">Calcular</string>
 
 </resources>

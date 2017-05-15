@@ -1,20 +1,20 @@
 package com.brunocarvalho.calculadoraclt;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.brunocarvalho.calculadoraclt.fragments.FeriasFragment;
 import com.brunocarvalho.calculadoraclt.fragments.RescisaoFragment;
 import com.brunocarvalho.calculadoraclt.fragments.SalLiquidoFragment;
-import com.brunocarvalho.calculadoraclt.fragments.FeriasFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_sobre) {
+            startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
 

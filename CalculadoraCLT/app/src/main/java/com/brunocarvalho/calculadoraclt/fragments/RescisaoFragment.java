@@ -23,6 +23,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import fr.ganfra.materialspinner.MaterialSpinner;
+
 /**
  * Created by carva on 13/05/2017.
  */

@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">Calculadora CLT</string>
+
     <string name="action_settings">Settings</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="action_sobre">Sobre</string>
+    <string name="gohorse_project">GoHorse Project</string>
+    <string name="github">https://github.com/carvalhobm/CalculadoraCLT</string>
+    <string name="github_description">GitHub</string>
+
     <string name="rescisao">Rescisão</string>
     <string name="ferias">Férias</string>
     <string name="sal_liquido">Salário Líquido</string>

@@ -3,6 +3,7 @@ package com.brunocarvalho.calculadoraclt.fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,11 +14,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.brunocarvalho.calculadoraclt.R;
+import com.brunocarvalho.calculadoraclt.ResultActivity;
+import com.brunocarvalho.calculadoraclt.negocio.to.ResultadoTO;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +35,8 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 
 public class RescisaoFragment extends Fragment {
 
+    public static final String RESULTADO = "Resultado";
+
     private DatePickerDialog datePickerContratacao;
     private DatePickerDialog datePickerDemissao;
 
@@ -41,6 +47,8 @@ public class RescisaoFragment extends Fragment {
 
     private Spinner spinnerMotivo;
     private Spinner spinnerAviso;
+
+    private Button btnCalcular;
 
     private SimpleDateFormat sdf;
 
@@ -100,6 +108,8 @@ public class RescisaoFragment extends Fragment {
 
         spinnerMotivo = (Spinner) view.findViewById(R.id.spinner_motivo);
         spinnerAviso = (Spinner) view.findViewById(R.id.spinner_aviso);
+
+        btnCalcular = (Button) view.findViewById(R.id.btn_calcular_rescisao);
 
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
@@ -231,6 +241,22 @@ public class RescisaoFragment extends Fragment {
                 editTextAviso.setText("");
             }
         });
+
+        // Button Calcular
+        btnCalcular.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final ResultadoTO result = new ResultadoTO();
+                result.setTituloResultado("Rescisao");
+
+                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                intent.putExtra(RescisaoFragment.RESULTADO, result);
+
+                startActivity(intent);
+            }
+        });
+
     }
 
 }

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.brunocarvalho.calculadoraclt.ResultActivity"
+    tools:showIn="@layout/activity_result">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <TextView
+        android:id="@+id/text_view_titulo_valores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_valores_informados"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold" />
+
+    <!-- First Row-->
+    <TextView
+        android:id="@+id/text_view_sal_bruto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/sal_bruto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_titulo_valores" />
+
+    <TextView
+        android:id="@+id/text_view_sal_bruto_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.500,00"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_sal_bruto"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto" />
+
+    <TextView
+        android:id="@+id/text_view_media_hrs_extras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/horas_extras"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text_view_sal_bruto"/>
+
+    <TextView
+        android:id="@+id/text_view_media_hrs_extras_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.500,00"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_media_hrs_extras"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_media_hrs_extras" />
+
+    <!-- Second Row-->
+    <TextView
+        android:id="@+id/text_view_dependentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/dependentes"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto_val" />
+
+    <TextView
+        android:id="@+id/text_view_dependentes_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="10"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dependentes"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dependentes" />
+
+    <TextView
+        android:id="@+id/text_view_dias_usufruidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dias_usufruidos"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text_view_dependentes"/>
+
+    <TextView
+        android:id="@+id/text_view_dias_usufruidos_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="20"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dias_usufruidos"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dias_usufruidos" />
+
+    <!-- Third Row-->
+    <TextView
+        android:id="@+id/text_view_abono_pecuniario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/abono_pecuniario_abreviado"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dependentes_val" />
+
+    <TextView
+        android:id="@+id/text_view_abono_pecuniario_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sim"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_abono_pecuniario"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_abono_pecuniario" />
+
+    <TextView
+        android:id="@+id/text_view_adiantar_decimo_terceiro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/adiantar_decimo_terceiro"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text_view_abono_pecuniario"/>
+
+    <TextView
+        android:id="@+id/text_view_dias_adiantar_decimo_terceiro_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Não"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_adiantar_decimo_terceiro"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_adiantar_decimo_terceiro" />
+
+    <TextView
+        android:id="@+id/text_view_titulo_resultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_resultado"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/text_view_abono_pecuniario_val"
+        app:layout_constraintLeft_toLeftOf="@id/text_view_titulo_valores"/>
+
+</android.support.constraint.ConstraintLayout>

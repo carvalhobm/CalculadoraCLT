@@ -21,21 +21,18 @@ import android.widget.Spinner;
 
 import com.brunocarvalho.calculadoraclt.R;
 import com.brunocarvalho.calculadoraclt.ResultActivity;
-import com.brunocarvalho.calculadoraclt.negocio.to.ResultadoTO;
+import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
+import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-
-import fr.ganfra.materialspinner.MaterialSpinner;
 
 /**
  * Created by carva on 13/05/2017.
  */
 
 public class RescisaoFragment extends Fragment {
-
-    public static final String RESULTADO = "Resultado";
 
     private DatePickerDialog datePickerContratacao;
     private DatePickerDialog datePickerDemissao;
@@ -247,11 +244,11 @@ public class RescisaoFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final ResultadoTO result = new ResultadoTO();
+                final CalculadoraTO result = new CalculadoraTO();
                 result.setTituloResultado("Rescisao");
 
                 Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra(RescisaoFragment.RESULTADO, result);
+                intent.putExtra(ConstantsUtil.RESULTADO, result);
 
                 startActivity(intent);
             }

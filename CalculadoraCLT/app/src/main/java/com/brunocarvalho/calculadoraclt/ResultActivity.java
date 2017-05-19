@@ -2,17 +2,17 @@ package com.brunocarvalho.calculadoraclt;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.TextView;
 
-import com.brunocarvalho.calculadoraclt.fragments.RescisaoFragment;
-import com.brunocarvalho.calculadoraclt.negocio.to.ResultadoTO;
+import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
+import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
 
 public class ResultActivity extends AppCompatActivity {
+
+    private TextView textViewVrSalBruto;
+    private TextView textViewNumDependentes;
 
     private TextView textViewTituloResultado;
 
@@ -28,13 +28,23 @@ public class ResultActivity extends AppCompatActivity {
         findViews();
 
         Intent intent = getIntent();
-        final ResultadoTO resultado = (ResultadoTO) intent.getSerializableExtra(RescisaoFragment.RESULTADO);
+        final CalculadoraTO dados = (CalculadoraTO) intent.getSerializableExtra(ConstantsUtil.RESULTADO);
 
-        textViewTituloResultado.setText(resultado.getTituloResultado());
+        atribuirValoresEmTela(dados);
     }
 
-    private void findViews(){
+    private void findViews() {
+        textViewVrSalBruto = (TextView) findViewById(R.id.text_view_sal_bruto_val);
+        textViewNumDependentes = (TextView) findViewById(R.id.text_view_dependentes_val);
         textViewTituloResultado = (TextView) findViewById(R.id.text_view_titulo_resultado);
+    }
+
+    private void atribuirValoresEmTela(final CalculadoraTO dados){
+
+        textViewVrSalBruto.setText(dados.getVrSalBruto().toString());
+        textViewNumDependentes.setText(dados.getNumDependentes().toString());
+
+        textViewTituloResultado.setText(textViewTituloResultado.getText().toString().concat(" - R$ ").concat(dados.getVrResultado().toString()));
     }
 
 }

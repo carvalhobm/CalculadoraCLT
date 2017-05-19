@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.brunocarvalho.calculadoraclt.ResultActivity"
+    tools:showIn="@layout/activity_result_sal_liquido">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="81dp" />
+
+    <TextView
+        android:id="@+id/text_view_titulo_valores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_valores_informados"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold" />
+
+    <!-- First Row-->
+    <TextView
+        android:id="@+id/text_view_sal_bruto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/sal_bruto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_titulo_valores" />
+
+    <TextView
+        android:id="@+id/text_view_sal_bruto_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_sal_bruto"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto" />
+
+    <TextView
+        android:id="@+id/text_view_pensao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pensao"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text_view_sal_bruto" />
+
+    <TextView
+        android:id="@+id/text_view_pensao_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_pensao"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_pensao" />
+
+    <!-- Second Row-->
+    <TextView
+        android:id="@+id/text_view_dependentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/dependentes"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto_val" />
+
+    <TextView
+        android:id="@+id/text_view_dependentes_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dependentes"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dependentes" />
+
+    <TextView
+        android:id="@+id/text_view_plano_saude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/plano_saude"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@id/text_view_dependentes" />
+
+    <TextView
+        android:id="@+id/text_view_plano_saude_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_plano_saude"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_plano_saude" />
+
+    <!-- Third Row-->
+    <TextView
+        android:id="@+id/text_view_outros_descontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/outros_descontos"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dependentes_val" />
+
+    <TextView
+        android:id="@+id/text_view_outros_descontos_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_outros_descontos"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_outros_descontos" />
+
+    <TextView
+        android:id="@+id/text_view_titulo_resultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_resultado"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/text_view_titulo_valores"
+        app:layout_constraintTop_toBottomOf="@id/text_view_outros_descontos_val" />
+
+    <TextView
+        android:id="@+id/text_proventos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/proventos"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_titulo_resultado" />
+
+    <TextView
+        android:id="@+id/text_view_provento_sal_bruto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="@string/sal_bruto_cifra"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_proventos" />
+
+    <TextView
+        android:id="@+id/text_view_provento_sal_bruto_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_provento_sal_bruto"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_provento_sal_bruto" />
+
+
+    <TextView
+        android:id="@+id/text_view_descontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="0dp"
+        android:paddingBottom="10dp"
+        android:text="@string/descontos"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_titulo_resultado" />
+
+    <TextView
+        android:id="@+id/text_view_inss"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:text="@string/label_inss"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_view_descontos" />
+
+    <TextView
+        android:id="@+id/text_view_inss_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_inss"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_inss" />
+
+    <TextView
+        android:id="@+id/text_view_irrf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/label_irrf"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_view_inss_val" />
+
+    <TextView
+        android:id="@+id/text_view_irrf_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_irrf"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_irrf" />
+
+
+    <TextView
+        android:id="@+id/text_view_desc_outros_descontos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="10dp"
+        android:text="@string/outros_descontos"
+        app:layout_constraintLeft_toRightOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/text_view_irrf_val" />
+
+    <TextView
+        android:id="@+id/text_view_desc_outros_descontos_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_desc_outros_descontos"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_desc_outros_descontos" />
+
+</android.support.constraint.ConstraintLayout>

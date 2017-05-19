@@ -24,7 +24,6 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ResultActivity"
-            android:label="@string/title_activity_result"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data

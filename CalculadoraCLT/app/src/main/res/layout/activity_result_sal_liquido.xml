@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_result" />
+    <include layout="@layout/content_result_sal_liquido" />
 
 </android.support.design.widget.CoordinatorLayout>

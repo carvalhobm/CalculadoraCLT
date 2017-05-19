@@ -2,23 +2,25 @@ package com.brunocarvalho.calculadoraclt.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.brunocarvalho.calculadoraclt.R;
 import com.brunocarvalho.calculadoraclt.ResultActivity;
-import com.brunocarvalho.calculadoraclt.negocio.calculadora.Calculadora;
+import com.brunocarvalho.calculadoraclt.negocio.service.Calculadora;
+import com.brunocarvalho.calculadoraclt.negocio.service.impl.CalculadoraImpl;
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Created by carva on 13/05/2017.
@@ -34,6 +36,8 @@ public class SalLiquidoFragment extends Fragment {
 
     private EditText editTextVrSalBruto;
     private EditText editTextNumDependentes;
+    private EditText editTextPensao;
+    private EditText editTextPlanoSaude;
     private EditText editTextOutrosDescontos;
 
     public SalLiquidoFragment() {
@@ -55,16 +59,18 @@ public class SalLiquidoFragment extends Fragment {
 
         createListeners();
 
-        calc = new Calculadora();
+        calc = new CalculadoraImpl();
 
         return rootView;
     }
 
     private void findViews(View view) {
 
-        editTextVrSalBruto = (EditText) view.findViewById(R.id.input_salario_bruto);
-        editTextNumDependentes = (EditText) view.findViewById(R.id.input_dependentes);
-        editTextOutrosDescontos = (EditText) view.findViewById(R.id.input_descontos);
+        editTextVrSalBruto = (EditText) view.findViewById(R.id.edit_text_salario_bruto);
+        editTextNumDependentes = (EditText) view.findViewById(R.id.edit_text_dependentes);
+        editTextPensao = (EditText) view.findViewById(R.id.edit_text_pensao);
+        editTextPlanoSaude = (EditText) view.findViewById(R.id.edit_text_plano_saude);
+        editTextOutrosDescontos = (EditText) view.findViewById(R.id.edit_text_descontos);
 
         btnCalcular = (Button) view.findViewById(R.id.btn_calcular_sal_liquido);
 
@@ -72,6 +78,7 @@ public class SalLiquidoFragment extends Fragment {
     }
 
     private void createListeners() {
+
         // Button Calcular
         btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,18 +96,16 @@ public class SalLiquidoFragment extends Fragment {
         });
     }
 
-    private CalculadoraTO obterValores(){
+    private CalculadoraTO obterValores() {
         final CalculadoraTO dados = new CalculadoraTO();
 
-        if(!editTextVrSalBruto.getText().toString().equals("")){
-            dados.setVrSalBruto(Double.valueOf(editTextVrSalBruto.getText().toString()));
-        }
-        if(!editTextNumDependentes.getText().toString().equals("")){
-            dados.setNumDependentes(Integer.valueOf(editTextNumDependentes.getText().toString()));
-        }
-        if(!editTextOutrosDescontos.getText().toString().equals("")){
-            dados.setVrOutrosDescontos(Double.valueOf(editTextOutrosDescontos.getText().toString()));
-        }
+        dados.setTituloResultado(ConstantsUtil.SAL_LIQUIDO);
+
+        dados.setVrSalBruto(editTextVrSalBruto.getText().toString());
+        dados.setNumDependentes(editTextNumDependentes.getText().toString());
+        dados.setVrPensaoAlimenticia(editTextPensao.getText().toString());
+        dados.setVrPlanoSaude(editTextPlanoSaude.getText().toString());
+        dados.setVrOutrosDescontos(editTextOutrosDescontos.getText().toString());
 
         return dados;
     }

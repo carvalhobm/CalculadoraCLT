@@ -21,6 +21,8 @@ import android.widget.Spinner;
 
 import com.brunocarvalho.calculadoraclt.R;
 import com.brunocarvalho.calculadoraclt.ResultActivity;
+import com.brunocarvalho.calculadoraclt.negocio.service.Calculadora;
+import com.brunocarvalho.calculadoraclt.negocio.service.impl.CalculadoraImpl;
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
 
@@ -33,6 +35,8 @@ import java.util.Locale;
  */
 
 public class RescisaoFragment extends Fragment {
+
+    private Calculadora calc;
 
     private DatePickerDialog datePickerContratacao;
     private DatePickerDialog datePickerDemissao;
@@ -86,6 +90,8 @@ public class RescisaoFragment extends Fragment {
         ArrayAdapter<String> adapterAviso = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_dropdown_item_1line, avisoList);
         spinnerAviso.setAdapter(adapterAviso);
+
+        calc = new CalculadoraImpl();
 
         return rootView;
     }
@@ -244,16 +250,29 @@ public class RescisaoFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                final CalculadoraTO result = new CalculadoraTO();
-                result.setTituloResultado("Rescisao");
+                final CalculadoraTO dados = obterValores();
+
+                calc.calcularRescisao(dados);
 
                 Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra(ConstantsUtil.RESULTADO, result);
+                intent.putExtra(ConstantsUtil.RESULTADO, dados);
 
                 startActivity(intent);
             }
         });
+    }
 
+    private CalculadoraTO obterValores(){
+        final CalculadoraTO dados = new CalculadoraTO();
+
+        dados.setTituloResultado(ConstantsUtil.RESCISAO);
+
+        //if(!editTextVrSalBruto.getText().toString().equals("")){
+        //    dados.setVrSalBruto(Double.valueOf(editTextVrSalBruto.getText().toString()));
+        //}
+
+
+        return dados;
     }
 
 }

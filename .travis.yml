@@ -1,5 +1,5 @@
 language: android
-script: gradle build
+script: CalculadoraCLT/gradle build
 android:
   components:
     # Uncomment the lines below if you want to

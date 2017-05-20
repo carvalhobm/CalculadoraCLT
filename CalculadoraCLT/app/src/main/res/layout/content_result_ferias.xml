@@ -127,21 +127,6 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_abono_pecuniario" />
 
     <TextView
-        android:id="@+id/text_view_adiantar_decimo_terceiro"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/adiantar_decimo_terceiro"
-        app:layout_constraintLeft_toRightOf="@+id/guideline"
-        app:layout_constraintTop_toTopOf="@id/text_view_abono_pecuniario" />
-
-    <TextView
-        android:id="@+id/text_view_adiantar_decimo_terceiro_val"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@+id/text_view_adiantar_decimo_terceiro"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_adiantar_decimo_terceiro" />
-
-    <TextView
         android:id="@+id/text_view_titulo_resultado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,8 +137,8 @@
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/title_label"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="@id/text_view_titulo_valores"
-        app:layout_constraintTop_toBottomOf="@id/text_view_abono_pecuniario_val" />
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_titulo_valores"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_abono_pecuniario_val" />
 
     <TextView
         android:id="@+id/text_proventos"
@@ -234,13 +219,13 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_pro_abono_pecuniario" />
 
     <TextView
-        android:id="@+id/text_view_pro_adiantar_decimo_terceiro"
+        android:id="@+id/text_view_pro_abono_pecuniario_adicional"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
-        android:text="@string/adiantamento_decimo_terceiro"
+        android:text="@string/abono_pecuniario_abreviado_adicional"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -248,11 +233,11 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_pro_abono_pecuniario_val" />
 
     <TextView
-        android:id="@+id/text_view_pro_adiantar_decimo_terceiro_val"
+        android:id="@+id/text_view_pro_abono_pecuniario_adicional_val"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="@+id/text_view_pro_adiantar_decimo_terceiro"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_pro_adiantar_decimo_terceiro" />
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_pro_abono_pecuniario_adicional"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_pro_abono_pecuniario_adicional" />
 
     <TextView
         android:id="@+id/text_view_descontos"

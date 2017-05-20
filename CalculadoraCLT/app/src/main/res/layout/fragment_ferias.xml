@@ -108,18 +108,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/switch_adiantar_decimo_terceiro"
-                    android:paddingRight="20dp"
-                    android:paddingTop="15dp"
-                    android:text="@string/adiantar_decimo_terceiro" />
-
-                <Switch
-                    android:id="@+id/switch_adiantar_decimo_terceiro"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
             </GridLayout>
 
             <Button

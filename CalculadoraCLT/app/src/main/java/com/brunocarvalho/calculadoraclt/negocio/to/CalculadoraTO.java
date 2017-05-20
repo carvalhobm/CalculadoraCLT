@@ -27,7 +27,7 @@ public class CalculadoraTO implements Serializable {
     private BigDecimal vrFerias;
     private BigDecimal vrAdicionalFerias;
     private BigDecimal vrAbono;
-    private BigDecimal vrAdiantamento;
+    private BigDecimal vrAdicionalAbono;
 
     //Campos Sal Liquido
     private BigDecimal vrPensaoAlimenticia;
@@ -239,7 +239,7 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrFerias() {
-        if(vrFerias == null){
+        if (vrFerias == null) {
             vrFerias = BigDecimal.ZERO;
         }
         return vrFerias;
@@ -250,7 +250,7 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrAdicionalFerias() {
-        if(vrAdicionalFerias == null){
+        if (vrAdicionalFerias == null) {
             vrAdicionalFerias = BigDecimal.ZERO;
         }
         return vrAdicionalFerias;
@@ -261,7 +261,7 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrAbono() {
-        if(vrAbono == null){
+        if (vrAbono == null) {
             vrAbono = BigDecimal.ZERO;
         }
         return vrAbono;
@@ -270,15 +270,15 @@ public class CalculadoraTO implements Serializable {
     public void setVrAbono(BigDecimal vrAbono) {
         this.vrAbono = vrAbono;
     }
-
-    public BigDecimal getVrAdiantamento() {
-        if(vrAdiantamento == null){
-            vrAdiantamento = BigDecimal.ZERO;
+    
+    public BigDecimal getVrAdicionalAbono() {
+        if (vrAdicionalAbono == null) {
+            vrAdicionalAbono = BigDecimal.ZERO;
         }
-        return vrAdiantamento;
+        return vrAdicionalAbono;
     }
 
-    public void setVrAdiantamento(BigDecimal vrAdiantamento) {
-        this.vrAdiantamento = vrAdiantamento;
+    public void setVrAdicionalAbono(BigDecimal vrAdicionalAbono) {
+        this.vrAdicionalAbono = vrAdicionalAbono;
     }
 }

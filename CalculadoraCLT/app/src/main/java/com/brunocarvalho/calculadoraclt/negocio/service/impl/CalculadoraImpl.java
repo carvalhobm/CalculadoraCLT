@@ -12,18 +12,45 @@ import java.math.RoundingMode;
 
 public class CalculadoraImpl implements Calculadora {
 
-    public static final BigDecimal BD_CEM = BigDecimal.valueOf(100);
+    public static final BigDecimal BD_CEM = new BigDecimal("100");
+    public static final BigDecimal TRINTA_DIAS = new BigDecimal("30");
+    public static final BigDecimal TRES = new BigDecimal("3");
 
     public void calcularRescisao(final CalculadoraTO dados) {
 
     }
 
     public void calcularFerias(final CalculadoraTO dados) {
+        dados.setVrResultado(BigDecimal.ZERO);
 
+        BigDecimal vrBase = dados.getVrSalBruto().add(dados.getVrHrsExtras()).divide(TRINTA_DIAS, 10, RoundingMode.HALF_UP).multiply(new BigDecimal(dados.getVrDiasFerias()));
+        BigDecimal vrAdicionalFerias = vrBase.divide(TRES, 10, RoundingMode.HALF_UP);
+        BigDecimal vrInss = calcularINSS(vrBase.add(vrAdicionalFerias));
+        BigDecimal vrIrrf = calcularIRRF(vrBase.add(vrAdicionalFerias), vrInss, BigDecimal.ZERO, dados.getNumDependentes());
+        BigDecimal vrAbonoPecuniario = BigDecimal.ZERO;
+        BigDecimal vrAdicionalAbonoPecuniario = BigDecimal.ZERO;
+
+        if (dados.getIcAbonoPecuniario()) {
+            vrAbonoPecuniario = dados.getVrSalBruto().divide(TRINTA_DIAS, 10, RoundingMode.HALF_UP).multiply(BigDecimal.TEN);
+            vrAdicionalAbonoPecuniario = vrAbonoPecuniario.divide(TRES, 10, RoundingMode.HALF_UP);
+        }
+
+        dados.setVrFerias(vrBase.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrAdicionalFerias(vrAdicionalFerias.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrAbono(vrAbonoPecuniario.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrAdicionalAbono(vrAdicionalAbonoPecuniario.setScale(2, RoundingMode.HALF_UP));
+
+        dados.setVrInss(vrInss.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrIrrf(vrIrrf.setScale(2, RoundingMode.HALF_UP));
+
+        BigDecimal proventos = vrBase.add(vrAdicionalFerias).add(vrAbonoPecuniario).add(vrAdicionalAbonoPecuniario);
+        BigDecimal descontos = vrInss.add(vrIrrf);
+
+        dados.setVrResultado(proventos.subtract(descontos).setScale(2, RoundingMode.HALF_UP));
     }
 
     public void calcularSalarioLiquido(final CalculadoraTO dados) {
-        dados.setVrResultado(BigDecimal.valueOf(0.0));
+        dados.setVrResultado(BigDecimal.ZERO);
 
         dados.setVrInss(calcularINSS(dados.getVrSalBruto()));
         dados.setVrIrrf(calcularIRRF(dados.getVrSalBruto(), dados.getVrInss(), dados.getVrPensaoAlimenticia(), dados.getNumDependentes()));

@@ -15,11 +15,10 @@ public class ResultActivity extends AppCompatActivity {
     private TextView textViewHrExtra;
     private TextView textViewDiasUsufruidos;
     private TextView textViewAbonoPecuniario;
-    private TextView textViewAdiantar13;
     private TextView textViewVrFerias;
     private TextView textViewVrFeriasTerco;
     private TextView textViewVrAbono;
-    private TextView textViewVrAdiantamento13;
+    private TextView textViewVrAbonoAdicional;
 
     //Campos Sal. Liquido
     private TextView textViewVrPensao;
@@ -29,7 +28,6 @@ public class ResultActivity extends AppCompatActivity {
     private TextView textViewInssVal;
     private TextView textViewIrrfVal;
     private TextView textViewDescOutrosDescontos;
-
 
 
     //Campo Comum
@@ -81,11 +79,10 @@ public class ResultActivity extends AppCompatActivity {
         textViewHrExtra = (TextView) findViewById(R.id.text_view_hr_extra_val);
         textViewDiasUsufruidos = (TextView) findViewById(R.id.text_view_dias_usufruidos_val);
         textViewAbonoPecuniario = (TextView) findViewById(R.id.text_view_abono_pecuniario_val);
-        textViewAdiantar13 = (TextView) findViewById(R.id.text_view_adiantar_decimo_terceiro_val);
         textViewVrFerias = (TextView) findViewById(R.id.text_view_ferias_val);
         textViewVrFeriasTerco = (TextView) findViewById(R.id.text_view_ferias_terco_val);
         textViewVrAbono = (TextView) findViewById(R.id.text_view_pro_abono_pecuniario_val);
-        textViewVrAdiantamento13 = (TextView) findViewById(R.id.text_view_pro_adiantar_decimo_terceiro_val);
+        textViewVrAbonoAdicional = (TextView) findViewById(R.id.text_view_pro_abono_pecuniario_adicional_val);
 
         findViewsComuns();
     }
@@ -111,7 +108,7 @@ public class ResultActivity extends AppCompatActivity {
         textViewIrrfVal = (TextView) findViewById(R.id.text_view_irrf_val);
     }
 
-    private void atribuirValoresEmTelaRescisao(final CalculadoraTO dados){
+    private void atribuirValoresEmTelaRescisao(final CalculadoraTO dados) {
 
         textViewVrSalBruto.setText(dados.getVrSalBruto().toString());
         textViewNumDependentes.setText(dados.getNumDependentes().toString());
@@ -119,31 +116,26 @@ public class ResultActivity extends AppCompatActivity {
         textViewTituloResultado.setText(textViewTituloResultado.getText().toString().concat(" - R$ ").concat(dados.getVrResultado().toString()));
     }
 
-    private void atribuirValoresEmTelaFerias(final CalculadoraTO dados){
+    private void atribuirValoresEmTelaFerias(final CalculadoraTO dados) {
 
         textViewHrExtra.setText(dados.getVrHrsExtras().toString());
         textViewDiasUsufruidos.setText(dados.getVrDiasFerias().toString());
 
-        if(dados.getIcAbonoPecuniario()){
+        if (dados.getIcAbonoPecuniario()) {
             textViewAbonoPecuniario.setText(R.string.label_sim);
         } else {
             textViewAbonoPecuniario.setText(R.string.label_nao);
-        }
-        if(dados.getIcAdiantamento()){
-            textViewAdiantar13.setText(R.string.label_sim);
-        } else {
-            textViewAdiantar13.setText(R.string.label_nao);
         }
 
         textViewVrFerias.setText(dados.getVrFerias().toString());
         textViewVrFeriasTerco.setText(dados.getVrAdicionalFerias().toString());
         textViewVrAbono.setText(dados.getVrAbono().toString());
-        textViewVrAdiantamento13.setText(dados.getVrAdiantamento().toString());
+        textViewVrAbonoAdicional.setText(dados.getVrAdicionalAbono().toString());
 
         atribuirValoresComunsEmTela(dados);
     }
 
-    private void atribuirValoresEmTelaSalLiquido(final CalculadoraTO dados){
+    private void atribuirValoresEmTelaSalLiquido(final CalculadoraTO dados) {
 
         textViewVrPensao.setText(dados.getVrPensaoAlimenticia().toString());
         textViewVrPlanoSaude.setText(dados.getVrPlanoSaude().toString());

@@ -22,10 +22,9 @@
     <string name="abono_pecuniario">Abono pecuniário(Vender 1/3)</string>
     <string name="abono_pecuniario_abreviado">Abono pecuniário</string>
     <string name="abono_pecuniario_abreviado_cifra">Abono pecuniário (R$)</string>
+    <string name="abono_pecuniario_abreviado_adicional">Abono 1/3 adicional (R$)</string>
     <string name="horas_extras">Horas extras no ano (R$)</string>
     <string name="dias_usufruidos">Dias de férias</string>
-    <string name="adiantar_decimo_terceiro">Adiantar metade do 13º</string>
-    <string name="adiantamento_decimo_terceiro">Adiantamento 13º (R$)</string>
 
     <!-- Sal Liquido -->
     <string name="sal_liquido">Salário Líquido</string>

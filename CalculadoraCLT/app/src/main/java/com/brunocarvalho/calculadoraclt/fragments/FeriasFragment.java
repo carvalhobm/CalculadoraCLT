@@ -33,7 +33,6 @@ public class FeriasFragment extends Fragment {
     private EditText editTextNumDependentes;
     private EditText editTextDiasUsufruidos;
     private Switch switchAbono;
-    private Switch switchAdiantamento;
 
     private Button btnCalcular;
 
@@ -66,7 +65,6 @@ public class FeriasFragment extends Fragment {
         editTextNumDependentes = (EditText) view.findViewById(R.id.edit_text_dependentes);
         editTextDiasUsufruidos = (EditText) view.findViewById(R.id.edit_text_dias_usufruidos);
         switchAbono = (Switch) view.findViewById(R.id.switch_abono_pecuniario);
-        switchAdiantamento = (Switch) view.findViewById(R.id.switch_adiantar_decimo_terceiro);
 
         btnCalcular = (Button) view.findViewById(R.id.btn_calcular_ferias);
 
@@ -100,7 +98,6 @@ public class FeriasFragment extends Fragment {
         dados.setNumDependentes(editTextNumDependentes.getText().toString());
         dados.setVrDiasFerias(editTextDiasUsufruidos.getText().toString());
         dados.setIcAbonoPecuniario(switchAbono.isChecked());
-        dados.setIcAdiantamento(switchAdiantamento.isChecked());
 
         return dados;
     }

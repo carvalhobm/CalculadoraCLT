@@ -15,6 +15,8 @@ public class CalculadoraImpl implements Calculadora {
     public static final BigDecimal BD_CEM = new BigDecimal("100");
     public static final BigDecimal TRINTA_DIAS = new BigDecimal("30");
     public static final BigDecimal TRES = new BigDecimal("3");
+    public static final int SCALE = 2;
+    public static final int SCALE_DIVISOR = 10;
 
     public void calcularRescisao(final CalculadoraTO dados) {
 
@@ -23,30 +25,32 @@ public class CalculadoraImpl implements Calculadora {
     public void calcularFerias(final CalculadoraTO dados) {
         dados.setVrResultado(BigDecimal.ZERO);
 
-        BigDecimal vrBase = dados.getVrSalBruto().add(dados.getVrHrsExtras()).divide(TRINTA_DIAS, 10, RoundingMode.HALF_UP).multiply(new BigDecimal(dados.getVrDiasFerias()));
-        BigDecimal vrAdicionalFerias = vrBase.divide(TRES, 10, RoundingMode.HALF_UP);
+        BigDecimal vrSalarioBase = dados.getVrSalBruto().add(dados.getVrHrsExtras());
+
+        BigDecimal vrBase = vrSalarioBase.divide(TRINTA_DIAS, SCALE_DIVISOR, RoundingMode.CEILING).multiply(new BigDecimal(dados.getVrDiasFerias())).setScale(SCALE, RoundingMode.HALF_UP);
+        BigDecimal vrAdicionalFerias = vrBase.divide(TRES, SCALE_DIVISOR, RoundingMode.HALF_UP).setScale(SCALE, RoundingMode.HALF_UP);
         BigDecimal vrInss = calcularINSS(vrBase.add(vrAdicionalFerias));
         BigDecimal vrIrrf = calcularIRRF(vrBase.add(vrAdicionalFerias), vrInss, BigDecimal.ZERO, dados.getNumDependentes());
         BigDecimal vrAbonoPecuniario = BigDecimal.ZERO;
         BigDecimal vrAdicionalAbonoPecuniario = BigDecimal.ZERO;
 
         if (dados.getIcAbonoPecuniario()) {
-            vrAbonoPecuniario = dados.getVrSalBruto().divide(TRINTA_DIAS, 10, RoundingMode.HALF_UP).multiply(BigDecimal.TEN);
-            vrAdicionalAbonoPecuniario = vrAbonoPecuniario.divide(TRES, 10, RoundingMode.HALF_UP);
+            vrAbonoPecuniario = vrSalarioBase.divide(TRINTA_DIAS, SCALE_DIVISOR, RoundingMode.HALF_UP).multiply(BigDecimal.TEN).setScale(SCALE, RoundingMode.HALF_UP);
+            vrAdicionalAbonoPecuniario = vrAbonoPecuniario.divide(TRES, SCALE_DIVISOR, RoundingMode.HALF_UP).setScale(SCALE, RoundingMode.HALF_UP);
         }
 
-        dados.setVrFerias(vrBase.setScale(2, RoundingMode.HALF_UP));
-        dados.setVrAdicionalFerias(vrAdicionalFerias.setScale(2, RoundingMode.HALF_UP));
-        dados.setVrAbono(vrAbonoPecuniario.setScale(2, RoundingMode.HALF_UP));
-        dados.setVrAdicionalAbono(vrAdicionalAbonoPecuniario.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrFerias(vrBase);
+        dados.setVrAdicionalFerias(vrAdicionalFerias.setScale(SCALE, RoundingMode.HALF_UP));
+        dados.setVrAbono(vrAbonoPecuniario.setScale(SCALE, RoundingMode.HALF_UP));
+        dados.setVrAdicionalAbono(vrAdicionalAbonoPecuniario.setScale(SCALE, RoundingMode.HALF_UP));
 
-        dados.setVrInss(vrInss.setScale(2, RoundingMode.HALF_UP));
-        dados.setVrIrrf(vrIrrf.setScale(2, RoundingMode.HALF_UP));
+        dados.setVrInss(vrInss.setScale(SCALE, RoundingMode.HALF_UP));
+        dados.setVrIrrf(vrIrrf.setScale(SCALE, RoundingMode.HALF_UP));
 
         BigDecimal proventos = vrBase.add(vrAdicionalFerias).add(vrAbonoPecuniario).add(vrAdicionalAbonoPecuniario);
         BigDecimal descontos = vrInss.add(vrIrrf);
 
-        dados.setVrResultado(proventos.subtract(descontos).setScale(2, RoundingMode.HALF_UP));
+        dados.setVrResultado(proventos.subtract(descontos).setScale(SCALE, RoundingMode.HALF_UP));
     }
 
     public void calcularSalarioLiquido(final CalculadoraTO dados) {
@@ -57,7 +61,7 @@ public class CalculadoraImpl implements Calculadora {
 
         final BigDecimal vrDescontos = dados.getVrInss().add(dados.getVrIrrf()).add(dados.getVrPensaoAlimenticia()).add(dados.getVrPlanoSaude()).add(dados.getVrOutrosDescontos());
 
-        dados.setVrResultado(dados.getVrSalBruto().subtract(vrDescontos).setScale(2, RoundingMode.HALF_UP));
+        dados.setVrResultado(dados.getVrSalBruto().subtract(vrDescontos).setScale(SCALE, RoundingMode.HALF_UP));
     }
 
     private void calcularFGTS() {
@@ -78,12 +82,12 @@ public class CalculadoraImpl implements Calculadora {
             resultadoINSS = BigDecimal.valueOf(608.44);
         }
 
-        return resultadoINSS.setScale(2, RoundingMode.HALF_UP);
+        return resultadoINSS.setScale(SCALE, RoundingMode.HALF_UP);
     }
 
     private BigDecimal calcularIRRF(final BigDecimal vrSalBruto, final BigDecimal vrContINSS, final BigDecimal vrPensaoAlimenticia, final Integer numDependentes) {
 
-        BigDecimal baseCalculo = vrSalBruto.subtract(vrContINSS).subtract(vrPensaoAlimenticia).subtract(BigDecimal.valueOf(189.59).multiply(new BigDecimal(numDependentes)));
+        BigDecimal baseCalculo = vrSalBruto.subtract(vrContINSS).subtract(vrPensaoAlimenticia).subtract(new BigDecimal("189.59").multiply(new BigDecimal(numDependentes)));
         BigDecimal vrAliquota = BigDecimal.valueOf(0.0);
         BigDecimal vrDeducao = BigDecimal.valueOf(0.0);
 
@@ -105,7 +109,7 @@ public class CalculadoraImpl implements Calculadora {
             vrDeducao = BigDecimal.valueOf(869.36);
         }
 
-        return baseCalculo.multiply(vrAliquota.divide(BD_CEM)).subtract(vrDeducao).setScale(2, RoundingMode.HALF_UP);
+        return baseCalculo.multiply(vrAliquota.divide(BD_CEM)).subtract(vrDeducao).setScale(SCALE, RoundingMode.HALF_UP);
     }
 
 }

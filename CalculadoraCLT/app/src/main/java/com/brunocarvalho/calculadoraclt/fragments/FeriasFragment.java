@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,8 @@ import com.brunocarvalho.calculadoraclt.negocio.service.impl.CalculadoraImpl;
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
 
+import java.math.BigDecimal;
+
 /**
  * Created by carva on 13/05/2017.
  */
@@ -33,6 +36,9 @@ public class FeriasFragment extends Fragment {
     private EditText editTextNumDependentes;
     private EditText editTextDiasUsufruidos;
     private Switch switchAbono;
+
+    private TextInputLayout textInputDiasUsufruidos;
+    private TextInputLayout textInputSalBruto;
 
     private Button btnCalcular;
 
@@ -66,6 +72,9 @@ public class FeriasFragment extends Fragment {
         editTextDiasUsufruidos = (EditText) view.findViewById(R.id.edit_text_dias_usufruidos);
         switchAbono = (Switch) view.findViewById(R.id.switch_abono_pecuniario);
 
+        textInputDiasUsufruidos = (TextInputLayout) view.findViewById(R.id.input_layout_dias_usufruidos);
+        textInputSalBruto = (TextInputLayout) view.findViewById(R.id.input_layout_salario_bruto);
+
         btnCalcular = (Button) view.findViewById(R.id.btn_calcular_ferias);
 
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -78,14 +87,32 @@ public class FeriasFragment extends Fragment {
             public void onClick(View v) {
                 final CalculadoraTO dados = obterValores();
 
-                calc.calcularFerias(dados);
+                if (validInput(dados)) {
+                    calc.calcularFerias(dados);
+                    Intent intent = new Intent(getActivity(), ResultActivity.class);
+                    intent.putExtra(ConstantsUtil.RESULTADO, dados);
 
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra(ConstantsUtil.RESULTADO, dados);
+                    startActivity(intent);
+                }
 
-                startActivity(intent);
             }
         });
+    }
+
+    public Boolean validInput(final CalculadoraTO dados) {
+        Boolean isInputValid = Boolean.TRUE;
+
+        if (dados.getVrSalBruto() == null || dados.getVrSalBruto().compareTo(BigDecimal.ZERO) <= 0) {
+            textInputSalBruto.setError(getString(R.string.sal_bruto_invalido));
+            isInputValid = Boolean.FALSE;
+        }
+
+        if (dados.getVrDiasFerias() == null || dados.getVrDiasFerias() <= 0) {
+            textInputDiasUsufruidos.setError(getString(R.string.dias_usufruidos_invalido));
+            isInputValid = Boolean.FALSE;
+        }
+
+        return isInputValid;
     }
 
     private CalculadoraTO obterValores() {

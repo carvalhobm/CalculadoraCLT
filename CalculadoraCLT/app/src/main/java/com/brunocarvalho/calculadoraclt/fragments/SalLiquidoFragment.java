@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,6 +41,8 @@ public class SalLiquidoFragment extends Fragment {
     private EditText editTextPlanoSaude;
     private EditText editTextOutrosDescontos;
 
+    private TextInputLayout textInputSalBruto;
+
     public SalLiquidoFragment() {
 
     }
@@ -72,6 +75,8 @@ public class SalLiquidoFragment extends Fragment {
         editTextPlanoSaude = (EditText) view.findViewById(R.id.edit_text_plano_saude);
         editTextOutrosDescontos = (EditText) view.findViewById(R.id.edit_text_descontos);
 
+        textInputSalBruto = (TextInputLayout) view.findViewById(R.id.input_layout_salario_bruto);
+
         btnCalcular = (Button) view.findViewById(R.id.btn_calcular_sal_liquido);
 
         imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -86,14 +91,27 @@ public class SalLiquidoFragment extends Fragment {
 
                 final CalculadoraTO dados = obterValores();
 
-                calc.calcularSalarioLiquido(dados);
+                if(validInput(dados)){
+                    calc.calcularSalarioLiquido(dados);
 
-                final Intent intent = new Intent(getActivity(), ResultActivity.class);
-                intent.putExtra(ConstantsUtil.RESULTADO, dados);
+                    final Intent intent = new Intent(getActivity(), ResultActivity.class);
+                    intent.putExtra(ConstantsUtil.RESULTADO, dados);
 
-                startActivity(intent);
+                    startActivity(intent);
+                }
             }
         });
+    }
+
+    public Boolean validInput(final CalculadoraTO dados) {
+        Boolean isInputValid = Boolean.TRUE;
+
+        if (dados.getVrSalBruto() == null || dados.getVrSalBruto().compareTo(BigDecimal.ZERO) <= 0) {
+            textInputSalBruto.setError(getString(R.string.sal_bruto_invalido));
+            isInputValid = Boolean.FALSE;
+        }
+
+        return isInputValid;
     }
 
     private CalculadoraTO obterValores() {

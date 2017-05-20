@@ -47,7 +47,6 @@ public class CalculadoraTest {
         dados.setVrDiasFerias(20);
 
         dados.setIcAbonoPecuniario(Boolean.TRUE);
-        dados.setIcAdiantamento(Boolean.TRUE);
 
         calc.calcularFerias(dados);
 
@@ -55,6 +54,8 @@ public class CalculadoraTest {
         Assert.assertTrue(new BigDecimal("555.56").compareTo(dados.getVrAdicionalFerias()) == 0);
         Assert.assertTrue(new BigDecimal("833.33").compareTo(dados.getVrAbono()) == 0);
         Assert.assertTrue(new BigDecimal("277.78").compareTo(dados.getVrAdicionalAbono()) == 0);
+        Assert.assertTrue(new BigDecimal("200").compareTo(dados.getVrInss()) == 0);
+        Assert.assertTrue(new BigDecimal("8.87").compareTo(dados.getVrIrrf()) == 0);
         Assert.assertTrue(new BigDecimal("3124.47").compareTo(dados.getVrResultado()) == 0);
     }
 
@@ -74,7 +75,7 @@ public class CalculadoraTest {
         Assert.assertTrue(new BigDecimal("577.78").compareTo(dados.getVrAdicionalFerias()) == 0);
         Assert.assertTrue(new BigDecimal("866.67").compareTo(dados.getVrAbono()) == 0);
         Assert.assertTrue(new BigDecimal("288.89").compareTo(dados.getVrAdicionalAbono()) == 0);
-        Assert.assertTrue(new BigDecimal("3257.95").compareTo(dados.getVrResultado()) == 0);
+        Assert.assertTrue(new BigDecimal("3257.96").compareTo(dados.getVrResultado()) == 0);
     }
 
     @Test

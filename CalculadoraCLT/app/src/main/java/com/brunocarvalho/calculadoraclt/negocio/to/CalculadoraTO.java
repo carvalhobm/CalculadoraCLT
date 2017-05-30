@@ -3,10 +3,7 @@ package com.brunocarvalho.calculadoraclt.negocio.to;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-
-/**
- * Created by carva on 18/05/2017.
- */
+import java.util.Date;
 
 public class CalculadoraTO implements Serializable {
 
@@ -18,6 +15,15 @@ public class CalculadoraTO implements Serializable {
     private BigDecimal vrIrrf;
     private BigDecimal vrResultado;
     private Integer numDependentes;
+
+    //Campos Rescisao
+    private Date dtContratacao;
+    private Date dtDesligamento;
+    private Integer icMotivo;
+    private Integer icAviso;
+    private BigDecimal vrSaldoFgts;
+    private Boolean icPossuiFeriasVencidas;
+    private Integer vrDiasFeriasVencidas;
 
     //Campos Ferias
     private BigDecimal vrHrsExtras;
@@ -35,7 +41,7 @@ public class CalculadoraTO implements Serializable {
     private BigDecimal vrOutrosDescontos;
 
     public String getTituloResultado() {
-        return tituloResultado;
+        return this.tituloResultado;
     }
 
     public void setTituloResultado(String tituloResultado) {
@@ -43,10 +49,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrSalBruto() {
-        if (vrSalBruto == null) {
-            vrSalBruto = BigDecimal.ZERO;
+        if (this.vrSalBruto == null) {
+            this.vrSalBruto = BigDecimal.ZERO;
         }
-        return vrSalBruto;
+        return this.vrSalBruto;
     }
 
     public void setVrSalBruto(BigDecimal vrSalBruto) {
@@ -60,10 +66,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrInss() {
-        if (vrInss == null) {
-            vrInss = BigDecimal.ZERO;
+        if (this.vrInss == null) {
+            this.vrInss = BigDecimal.ZERO;
         }
-        return vrInss;
+        return this.vrInss;
     }
 
     public void setVrInss(BigDecimal vrInss) {
@@ -77,10 +83,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrIrrf() {
-        if (vrIrrf == null) {
-            vrIrrf = BigDecimal.ZERO;
+        if (this.vrIrrf == null) {
+            this.vrIrrf = BigDecimal.ZERO;
         }
-        return vrIrrf;
+        return this.vrIrrf;
     }
 
     public void setVrIrrf(BigDecimal vrIrrf) {
@@ -94,10 +100,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrResultado() {
-        if (vrResultado == null) {
-            vrResultado = BigDecimal.ZERO;
+        if (this.vrResultado == null) {
+            this.vrResultado = BigDecimal.ZERO;
         }
-        return vrResultado;
+        return this.vrResultado;
     }
 
     public void setVrResultado(BigDecimal vrResultado) {
@@ -111,10 +117,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public Integer getNumDependentes() {
-        if (numDependentes == null) {
-            numDependentes = 0;
+        if (this.numDependentes == null) {
+            this.numDependentes = 0;
         }
-        return numDependentes;
+        return this.numDependentes;
     }
 
     public void setNumDependentes(Integer numDependentes) {
@@ -128,10 +134,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrPensaoAlimenticia() {
-        if (vrPensaoAlimenticia == null) {
-            vrPensaoAlimenticia = BigDecimal.ZERO;
+        if (this.vrPensaoAlimenticia == null) {
+            this.vrPensaoAlimenticia = BigDecimal.ZERO;
         }
-        return vrPensaoAlimenticia;
+        return this.vrPensaoAlimenticia;
     }
 
     public void setVrPensaoAlimenticia(BigDecimal vrPensaoAlimenticia) {
@@ -145,10 +151,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrPlanoSaude() {
-        if (vrPlanoSaude == null) {
-            vrPlanoSaude = BigDecimal.ZERO;
+        if (this.vrPlanoSaude == null) {
+            this.vrPlanoSaude = BigDecimal.ZERO;
         }
-        return vrPlanoSaude;
+        return this.vrPlanoSaude;
     }
 
     public void setVrPlanoSaude(BigDecimal vrPlanoSaude) {
@@ -162,10 +168,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrOutrosDescontos() {
-        if (vrOutrosDescontos == null) {
-            vrOutrosDescontos = BigDecimal.ZERO;
+        if (this.vrOutrosDescontos == null) {
+            this.vrOutrosDescontos = BigDecimal.ZERO;
         }
-        return vrOutrosDescontos;
+        return this.vrOutrosDescontos;
     }
 
     public void setVrOutrosDescontos(BigDecimal vrOutrosDescontos) {
@@ -179,14 +185,14 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrTotalOutrosDescontos() {
-        return getVrOutrosDescontos().add(getVrPlanoSaude()).add(getVrPensaoAlimenticia());
+        return this.getVrOutrosDescontos().add(this.getVrPlanoSaude()).add(this.getVrPensaoAlimenticia());
     }
 
     public BigDecimal getVrHrsExtras() {
-        if (vrHrsExtras == null) {
-            vrHrsExtras = BigDecimal.ZERO;
+        if (this.vrHrsExtras == null) {
+            this.vrHrsExtras = BigDecimal.ZERO;
         }
-        return vrHrsExtras;
+        return this.vrHrsExtras;
     }
 
     public void setVrHrsExtras(BigDecimal vrHrsExtras) {
@@ -200,10 +206,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public Integer getVrDiasFerias() {
-        if (vrDiasFerias == null) {
-            vrDiasFerias = 0;
+        if (this.vrDiasFerias == null) {
+            this.vrDiasFerias = 0;
         }
-        return vrDiasFerias;
+        return this.vrDiasFerias;
     }
 
     public void setVrDiasFerias(Integer vrDiasFerias) {
@@ -217,10 +223,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public Boolean getIcAbonoPecuniario() {
-        if (icAbonoPecuniario == null) {
-            icAbonoPecuniario = Boolean.FALSE;
+        if (this.icAbonoPecuniario == null) {
+            this.icAbonoPecuniario = Boolean.FALSE;
         }
-        return icAbonoPecuniario;
+        return this.icAbonoPecuniario;
     }
 
     public void setIcAbonoPecuniario(Boolean icAbonoPecuniario) {
@@ -228,10 +234,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public Boolean getIcAdiantamento() {
-        if (icAdiantamento == null) {
-            icAdiantamento = Boolean.FALSE;
+        if (this.icAdiantamento == null) {
+            this.icAdiantamento = Boolean.FALSE;
         }
-        return icAdiantamento;
+        return this.icAdiantamento;
     }
 
     public void setIcAdiantamento(Boolean icAdiantamento) {
@@ -239,10 +245,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrFerias() {
-        if (vrFerias == null) {
-            vrFerias = BigDecimal.ZERO;
+        if (this.vrFerias == null) {
+            this.vrFerias = BigDecimal.ZERO;
         }
-        return vrFerias;
+        return this.vrFerias;
     }
 
     public void setVrFerias(BigDecimal vrFerias) {
@@ -250,10 +256,10 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrAdicionalFerias() {
-        if (vrAdicionalFerias == null) {
-            vrAdicionalFerias = BigDecimal.ZERO;
+        if (this.vrAdicionalFerias == null) {
+            this.vrAdicionalFerias = BigDecimal.ZERO;
         }
-        return vrAdicionalFerias;
+        return this.vrAdicionalFerias;
     }
 
     public void setVrAdicionalFerias(BigDecimal vrAdicionalFerias) {
@@ -261,24 +267,92 @@ public class CalculadoraTO implements Serializable {
     }
 
     public BigDecimal getVrAbono() {
-        if (vrAbono == null) {
-            vrAbono = BigDecimal.ZERO;
+        if (this.vrAbono == null) {
+            this.vrAbono = BigDecimal.ZERO;
         }
-        return vrAbono;
+        return this.vrAbono;
     }
 
     public void setVrAbono(BigDecimal vrAbono) {
         this.vrAbono = vrAbono;
     }
-    
+
     public BigDecimal getVrAdicionalAbono() {
-        if (vrAdicionalAbono == null) {
-            vrAdicionalAbono = BigDecimal.ZERO;
+        if (this.vrAdicionalAbono == null) {
+            this.vrAdicionalAbono = BigDecimal.ZERO;
         }
-        return vrAdicionalAbono;
+        return this.vrAdicionalAbono;
     }
 
     public void setVrAdicionalAbono(BigDecimal vrAdicionalAbono) {
         this.vrAdicionalAbono = vrAdicionalAbono;
+    }
+
+    public Date getDtContratacao() {
+        return this.dtContratacao;
+    }
+
+    public Date getDtDesligamento() {
+        return this.dtDesligamento;
+    }
+
+    public Integer getIcMotivo() {
+        return this.icMotivo;
+    }
+
+    public Integer getIcAviso() {
+        return this.icAviso;
+    }
+
+    public BigDecimal getVrSaldoFgts() {
+        if (this.vrSaldoFgts == null) {
+            this.vrSaldoFgts = BigDecimal.ZERO;
+        }
+        return this.vrSaldoFgts;
+    }
+
+    public Boolean getIcPossuiFeriasVencidas() {
+        return this.icPossuiFeriasVencidas;
+    }
+
+    public Integer getVrDiasFeriasVencidas() {
+        if (this.vrDiasFeriasVencidas == null) {
+            this.vrDiasFeriasVencidas = 0;
+        }
+        return this.vrDiasFeriasVencidas;
+    }
+
+    public void setDtContratacao(Date dtContratacao) {
+        this.dtContratacao = dtContratacao;
+    }
+
+    public void setDtDesligamento(Date dtDesligamento) {
+        this.dtDesligamento = dtDesligamento;
+    }
+
+    public void setIcMotivo(Integer icMotivo) {
+        this.icMotivo = icMotivo;
+    }
+
+    public void setIcAviso(Integer icAviso) {
+        this.icAviso = icAviso;
+    }
+
+    public void setVrSaldoFgts(BigDecimal vrSaldoFgts) {
+        this.vrSaldoFgts = vrSaldoFgts;
+    }
+
+    public void setVrSaldoFgts(String vrSaldoFgts) {
+        if (vrSaldoFgts != null && !vrSaldoFgts.equals("")) {
+            this.vrSaldoFgts = new BigDecimal(vrSaldoFgts).setScale(2, RoundingMode.HALF_UP);
+        }
+    }
+
+    public void setIcPossuiFeriasVencidas(Boolean icPossuiFeriasVencidas) {
+        this.icPossuiFeriasVencidas = icPossuiFeriasVencidas;
+    }
+
+    public void setVrDiasFeriasVencidas(Integer vrDiasFeriasVencidas) {
+        this.vrDiasFeriasVencidas = vrDiasFeriasVencidas;
     }
 }

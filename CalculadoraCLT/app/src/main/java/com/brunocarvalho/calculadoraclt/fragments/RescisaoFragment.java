@@ -21,43 +21,38 @@ import android.widget.Spinner;
 
 import com.brunocarvalho.calculadoraclt.R;
 import com.brunocarvalho.calculadoraclt.ResultActivity;
+import com.brunocarvalho.calculadoraclt.enuns.AvisoPrevioEnum;
+import com.brunocarvalho.calculadoraclt.enuns.MotivoEnum;
 import com.brunocarvalho.calculadoraclt.negocio.service.Calculadora;
 import com.brunocarvalho.calculadoraclt.negocio.service.impl.CalculadoraImpl;
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
+import com.brunocarvalho.calculadoraclt.util.StringUtil;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
-
-/**
- * Created by carva on 13/05/2017.
- */
 
 public class RescisaoFragment extends Fragment {
 
     private Calculadora calc;
 
-    private DatePickerDialog datePickerContratacao;
-    private DatePickerDialog datePickerDemissao;
-
+    private EditText editTextSalBruto;
     private EditText editTextDtContratacao;
+    private EditText editTextDtDemissao;
     private EditText editTextMotivo;
     private EditText editTextAviso;
-    private EditText editTextDtDemissao;
+    private EditText editTextDependentes;
+    private EditText editTextVrSaldoFgts;
+
+    private DatePickerDialog datePickerContratacao;
+    private DatePickerDialog datePickerDemissao;
 
     private Spinner spinnerMotivo;
     private Spinner spinnerAviso;
 
     private Button btnCalcular;
 
-    private SimpleDateFormat sdf;
-
     private View rootView;
     private InputMethodManager imm;
-
-    private String[] motivoList = {"Dispensa sem Justa Causa", "Dispensa com Justa Causa", "Pedido de demissão", "Contrato de experiência no prazo", "Contrato de experiência antes do prazo", "Aposentadoria do empregado", "Falecimento do empregador"};
-    String[] avisoList = {"Trabalhado", "Indenizado pelo empregador", "Não cumprido pelo empregado", "Dispensado"};
 
     public RescisaoFragment() {
 
@@ -72,71 +67,76 @@ public class RescisaoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_rescisao, container, false);
+        this.rootView = inflater.inflate(R.layout.fragment_rescisao, container, false);
 
-        String myFormat = "dd/MM/yyyy";
-        sdf = new SimpleDateFormat(myFormat, Locale.US);
+        this.findViews(this.rootView);
 
-        findViews(rootView);
+        this.createListeners();
 
-        createListeners();
+        this.setDateTimeField();
 
-        setDateTimeField();
+        ArrayAdapter<MotivoEnum> adapterMotivo = new ArrayAdapter<>(this.getActivity(),
+                android.R.layout.simple_dropdown_item_1line, MotivoEnum.values());
+        this.spinnerMotivo.setAdapter(adapterMotivo);
 
-        ArrayAdapter<String> adapterMotivo = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, motivoList);
-        spinnerMotivo.setAdapter(adapterMotivo);
+        ArrayAdapter<AvisoPrevioEnum> adapterAviso = new ArrayAdapter<>(this.getActivity(),
+                android.R.layout.simple_dropdown_item_1line, AvisoPrevioEnum.values());
+        this.spinnerAviso.setAdapter(adapterAviso);
 
-        ArrayAdapter<String> adapterAviso = new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, avisoList);
-        spinnerAviso.setAdapter(adapterAviso);
+        this.calc = new CalculadoraImpl();
 
-        calc = new CalculadoraImpl();
-
-        return rootView;
+        return this.rootView;
     }
 
     private void findViews(View view) {
-        editTextDtContratacao = (EditText) view.findViewById(R.id.edit_text_dt_contratacao);
-        editTextDtContratacao.setInputType(InputType.TYPE_NULL);
 
-        editTextDtDemissao = (EditText) view.findViewById(R.id.edit_text_dt_demissao);
-        editTextDtDemissao.setInputType(InputType.TYPE_NULL);
+        this.editTextSalBruto = (EditText) view.findViewById(R.id.edit_text_salario_bruto);
 
-        editTextMotivo = (EditText) view.findViewById(R.id.edit_text_motivo);
-        editTextMotivo.setInputType(InputType.TYPE_NULL);
+        this.editTextDtContratacao = (EditText) view.findViewById(R.id.edit_text_dt_contratacao);
+        this.editTextDtContratacao.setInputType(InputType.TYPE_NULL);
 
-        editTextAviso = (EditText) view.findViewById(R.id.edit_text_aviso);
-        editTextAviso.setInputType(InputType.TYPE_NULL);
+        this.editTextDtDemissao = (EditText) view.findViewById(R.id.edit_text_dt_demissao);
+        this.editTextDtDemissao.setInputType(InputType.TYPE_NULL);
 
-        spinnerMotivo = (Spinner) view.findViewById(R.id.spinner_motivo);
-        spinnerAviso = (Spinner) view.findViewById(R.id.spinner_aviso);
+        this.editTextMotivo = (EditText) view.findViewById(R.id.edit_text_motivo);
+        this.editTextMotivo.setInputType(InputType.TYPE_NULL);
 
-        btnCalcular = (Button) view.findViewById(R.id.btn_calcular_rescisao);
+        this.editTextAviso = (EditText) view.findViewById(R.id.edit_text_aviso);
+        this.editTextAviso.setInputType(InputType.TYPE_NULL);
 
-        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.editTextDependentes = (EditText) view.findViewById(R.id.edit_text_dependentes);
+        this.editTextVrSaldoFgts = (EditText) view.findViewById(R.id.edit_text_saldo_fgts);
+
+        this.spinnerMotivo = (Spinner) view.findViewById(R.id.spinner_motivo);
+        this.spinnerAviso = (Spinner) view.findViewById(R.id.spinner_aviso);
+
+        this.btnCalcular = (Button) view.findViewById(R.id.btn_calcular_rescisao);
+
+        this.imm = (InputMethodManager) this.getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     private void setDateTimeField() {
         Calendar newCalendar = Calendar.getInstance();
-        datePickerContratacao = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        this.datePickerContratacao = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
 
+            @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                editTextDtContratacao.setText(sdf.format(newDate.getTime()));
+                RescisaoFragment.this.editTextDtContratacao.setText(StringUtil.formatDateToString(newDate.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
-        datePickerDemissao = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+        this.datePickerDemissao = new DatePickerDialog(this.getActivity(), new DatePickerDialog.OnDateSetListener() {
 
+            @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 
                 Calendar newDate = Calendar.getInstance();
                 newDate.set(year, monthOfYear, dayOfMonth);
-                editTextDtDemissao.setText(sdf.format(newDate.getTime()));
+                RescisaoFragment.this.editTextDtDemissao.setText(StringUtil.formatDateToString(newDate.getTime()));
             }
 
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
@@ -145,132 +145,138 @@ public class RescisaoFragment extends Fragment {
 
     private void createListeners() {
         // EditText Contratação listener
-        editTextDtContratacao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.editTextDtContratacao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                    datePickerContratacao.show();
+                    RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                    RescisaoFragment.this.datePickerContratacao.show();
                 }
             }
         });
 
-        editTextDtContratacao.setOnClickListener(new View.OnClickListener() {
+        this.editTextDtContratacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                datePickerContratacao.show();
+                RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                RescisaoFragment.this.datePickerContratacao.show();
             }
         });
 
         // EditText Demissão listener
-        editTextDtDemissao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.editTextDtDemissao.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                    datePickerDemissao.show();
+                    RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                    RescisaoFragment.this.datePickerDemissao.show();
                 }
             }
         });
 
-        editTextDtDemissao.setOnClickListener(new View.OnClickListener() {
+        this.editTextDtDemissao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                datePickerDemissao.show();
+                RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                RescisaoFragment.this.datePickerDemissao.show();
             }
         });
 
         // EditText Motivo listener
-        editTextMotivo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.editTextMotivo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                    spinnerMotivo.performClick();
+                    RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                    RescisaoFragment.this.spinnerMotivo.performClick();
                 }
             }
         });
 
-        editTextMotivo.setOnClickListener(new View.OnClickListener() {
+        this.editTextMotivo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                spinnerMotivo.performClick();
+                RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                RescisaoFragment.this.spinnerMotivo.performClick();
             }
         });
 
         // EditText Aviso listener
-        editTextAviso.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        this.editTextAviso.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                    spinnerAviso.performClick();
+                    RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                    RescisaoFragment.this.spinnerAviso.performClick();
                 }
             }
         });
 
-        editTextAviso.setOnClickListener(new View.OnClickListener() {
+        this.editTextAviso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imm.hideSoftInputFromWindow(rootView.getWindowToken(), 0);
-                spinnerAviso.performClick();
+                RescisaoFragment.this.imm.hideSoftInputFromWindow(RescisaoFragment.this.rootView.getWindowToken(), 0);
+                RescisaoFragment.this.spinnerAviso.performClick();
             }
         });
 
         // Spinner's
-        spinnerMotivo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.spinnerMotivo.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editTextMotivo.setText(spinnerMotivo.getItemAtPosition(position).toString());
+                RescisaoFragment.this.editTextMotivo.setText(RescisaoFragment.this.spinnerMotivo.getItemAtPosition(position).toString());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                editTextMotivo.setText("");
+                RescisaoFragment.this.editTextMotivo.setText("");
             }
         });
 
-        spinnerAviso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.spinnerAviso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                editTextAviso.setText(spinnerAviso.getItemAtPosition(position).toString());
+                RescisaoFragment.this.editTextAviso.setText(RescisaoFragment.this.spinnerAviso.getItemAtPosition(position).toString());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                editTextAviso.setText("");
+                RescisaoFragment.this.editTextAviso.setText("");
             }
         });
 
         // Button Calcular
-        btnCalcular.setOnClickListener(new View.OnClickListener() {
+        this.btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                final CalculadoraTO dados = obterValores();
+                final CalculadoraTO dados = RescisaoFragment.this.obterValores();
 
-                calc.calcularRescisao(dados);
+                RescisaoFragment.this.calc.calcularRescisao(dados);
 
-                Intent intent = new Intent(getActivity(), ResultActivity.class);
+                Intent intent = new Intent(RescisaoFragment.this.getActivity(), ResultActivity.class);
                 intent.putExtra(ConstantsUtil.RESULTADO, dados);
 
-                startActivity(intent);
+                RescisaoFragment.this.startActivity(intent);
             }
         });
     }
 
-    private CalculadoraTO obterValores(){
+    private CalculadoraTO obterValores() {
         final CalculadoraTO dados = new CalculadoraTO();
 
         dados.setTituloResultado(ConstantsUtil.RESCISAO);
 
-        //if(!editTextVrSalBruto.getText().toString().equals("")){
-        //    dados.setVrSalBruto(Double.valueOf(editTextVrSalBruto.getText().toString()));
-        //}
+        dados.setVrSalBruto(this.editTextSalBruto.getText().toString());
 
+        dados.setIcMotivo(((MotivoEnum) this.spinnerMotivo.getSelectedItem()).getCoMotivo());
+        dados.setIcAviso(((AvisoPrevioEnum) this.spinnerAviso.getSelectedItem()).getCoAvisoPrevio());
+
+        dados.setNumDependentes(this.editTextDependentes.getText().toString());
+        dados.setVrSaldoFgts(this.editTextVrSaldoFgts.getText().toString());
+
+        dados.setDtContratacao(StringUtil.formatStringToDate(this.editTextDtContratacao.getText().toString()));
+        dados.setDtDesligamento(StringUtil.formatStringToDate(this.editTextDtDemissao.getText().toString()));
 
         return dados;
     }

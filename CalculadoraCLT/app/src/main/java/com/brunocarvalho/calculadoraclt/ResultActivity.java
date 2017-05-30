@@ -6,10 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
+import com.brunocarvalho.calculadoraclt.enuns.AvisoPrevioEnum;
+import com.brunocarvalho.calculadoraclt.enuns.MotivoEnum;
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
+import com.brunocarvalho.calculadoraclt.util.StringUtil;
 
 public class ResultActivity extends AppCompatActivity {
+
+    //Campos Rescisao
+    private TextView textViewDtContratacao;
+    private TextView textViewDtDesligamento;
+    private TextView textViewMotivo;
+    private TextView textViewAviso;
+    private TextView textViewFeriasVencidas;
+    private TextView textViewVrSaldoFgts;
 
     //Campos Ferias
     private TextView textViewHrExtra;
@@ -39,121 +50,145 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = getIntent();
+        Intent intent = this.getIntent();
         final CalculadoraTO dados = (CalculadoraTO) intent.getSerializableExtra(ConstantsUtil.RESULTADO);
 
         this.setTitle(dados.getTituloResultado());
 
         switch (dados.getTituloResultado()) {
             case ConstantsUtil.SAL_LIQUIDO:
-                setContentView(R.layout.activity_result_sal_liquido);
-                findViewsSalLiquido();
-                atribuirValoresEmTelaSalLiquido(dados);
+                this.setContentView(R.layout.activity_result_sal_liquido);
+                this.findViewsSalLiquido();
+                this.atribuirValoresEmTelaSalLiquido(dados);
                 break;
             case ConstantsUtil.FERIAS:
-                setContentView(R.layout.activity_result_ferias);
-                findViewsFerias();
-                atribuirValoresEmTelaFerias(dados);
+                this.setContentView(R.layout.activity_result_ferias);
+                this.findViewsFerias();
+                this.atribuirValoresEmTelaFerias(dados);
                 break;
             default:
-                setContentView(R.layout.activity_result_sal_liquido);
-                findViewsRescisao();
-                atribuirValoresEmTelaRescisao(dados);
+                this.setContentView(R.layout.activity_result_rescisao);
+                this.findViewsRescisao();
+                this.atribuirValoresEmTelaRescisao(dados);
                 break;
         }
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        this.setSupportActionBar(toolbar);
+        if (this.getSupportActionBar() != null) {
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     private void findViewsRescisao() {
 
-        textViewVrSalBruto = (TextView) findViewById(R.id.text_view_sal_bruto_val);
-        textViewNumDependentes = (TextView) findViewById(R.id.text_view_dependentes_val);
-        textViewTituloResultado = (TextView) findViewById(R.id.text_view_titulo_resultado);
+        this.textViewVrSalBruto = (TextView) this.findViewById(R.id.text_view_sal_bruto_val);
+        this.textViewNumDependentes = (TextView) this.findViewById(R.id.text_view_dependentes_val);
+        this.textViewTituloResultado = (TextView) this.findViewById(R.id.text_view_titulo_resultado);
+
+        this.textViewDtContratacao = (TextView) this.findViewById(R.id.text_view_dt_contratacao_val);
+        this.textViewDtDesligamento = (TextView) this.findViewById(R.id.text_view_dt_demissao_val);
+
+        this.textViewMotivo = (TextView) this.findViewById(R.id.text_view_motivo_val);
+        this.textViewAviso = (TextView) this.findViewById(R.id.text_view_aviso_val);
+
+        this.textViewFeriasVencidas = (TextView) this.findViewById(R.id.text_view_ferias_vencidas_val);
+        this.textViewVrSaldoFgts = (TextView) this.findViewById(R.id.text_view_saldo_fgts_val);
     }
 
     private void findViewsFerias() {
 
-        textViewHrExtra = (TextView) findViewById(R.id.text_view_hr_extra_val);
-        textViewDiasUsufruidos = (TextView) findViewById(R.id.text_view_dias_usufruidos_val);
-        textViewAbonoPecuniario = (TextView) findViewById(R.id.text_view_abono_pecuniario_val);
-        textViewVrFerias = (TextView) findViewById(R.id.text_view_ferias_val);
-        textViewVrFeriasTerco = (TextView) findViewById(R.id.text_view_ferias_terco_val);
-        textViewVrAbono = (TextView) findViewById(R.id.text_view_pro_abono_pecuniario_val);
-        textViewVrAbonoAdicional = (TextView) findViewById(R.id.text_view_pro_abono_pecuniario_adicional_val);
+        this.textViewHrExtra = (TextView) this.findViewById(R.id.text_view_hr_extra_val);
+        this.textViewDiasUsufruidos = (TextView) this.findViewById(R.id.text_view_dias_usufruidos_val);
+        this.textViewAbonoPecuniario = (TextView) this.findViewById(R.id.text_view_abono_pecuniario_val);
+        this.textViewVrFerias = (TextView) this.findViewById(R.id.text_view_ferias_val);
+        this.textViewVrFeriasTerco = (TextView) this.findViewById(R.id.text_view_ferias_terco_val);
+        this.textViewVrAbono = (TextView) this.findViewById(R.id.text_view_pro_abono_pecuniario_val);
+        this.textViewVrAbonoAdicional = (TextView) this.findViewById(R.id.text_view_pro_abono_pecuniario_adicional_val);
 
-        findViewsComuns();
+        this.findViewsComuns();
     }
 
     private void findViewsSalLiquido() {
 
-        textViewProventoSalBruto = (TextView) findViewById(R.id.text_view_provento_sal_bruto_val);
-        textViewVrPensao = (TextView) findViewById(R.id.text_view_pensao_val);
-        textViewVrPlanoSaude = (TextView) findViewById(R.id.text_view_plano_saude_val);
-        textViewVrOutrosDescontos = (TextView) findViewById(R.id.text_view_outros_descontos_val);
-        textViewDescOutrosDescontos = (TextView) findViewById(R.id.text_view_desc_outros_descontos_val);
+        this.textViewProventoSalBruto = (TextView) this.findViewById(R.id.text_view_provento_sal_bruto_val);
+        this.textViewVrPensao = (TextView) this.findViewById(R.id.text_view_pensao_val);
+        this.textViewVrPlanoSaude = (TextView) this.findViewById(R.id.text_view_plano_saude_val);
+        this.textViewVrOutrosDescontos = (TextView) this.findViewById(R.id.text_view_outros_descontos_val);
+        this.textViewDescOutrosDescontos = (TextView) this.findViewById(R.id.text_view_desc_outros_descontos_val);
 
-        findViewsComuns();
+        this.findViewsComuns();
     }
 
     private void findViewsComuns() {
-        textViewVrSalBruto = (TextView) findViewById(R.id.text_view_sal_bruto_val);
-        textViewNumDependentes = (TextView) findViewById(R.id.text_view_dependentes_val);
+        this.textViewVrSalBruto = (TextView) this.findViewById(R.id.text_view_sal_bruto_val);
+        this.textViewNumDependentes = (TextView) this.findViewById(R.id.text_view_dependentes_val);
 
-        textViewTituloResultado = (TextView) findViewById(R.id.text_view_titulo_resultado);
+        this.textViewTituloResultado = (TextView) this.findViewById(R.id.text_view_titulo_resultado);
 
-        textViewInssVal = (TextView) findViewById(R.id.text_view_inss_val);
-        textViewIrrfVal = (TextView) findViewById(R.id.text_view_irrf_val);
+        this.textViewInssVal = (TextView) this.findViewById(R.id.text_view_inss_val);
+        this.textViewIrrfVal = (TextView) this.findViewById(R.id.text_view_irrf_val);
     }
 
     private void atribuirValoresEmTelaRescisao(final CalculadoraTO dados) {
 
-        textViewVrSalBruto.setText(dados.getVrSalBruto().toString());
-        textViewNumDependentes.setText(dados.getNumDependentes().toString());
+        this.textViewVrSalBruto.setText(StringUtil.formatNumberToString(dados.getVrSalBruto()));
+        this.textViewNumDependentes.setText(StringUtil.formatNumberToString(dados.getNumDependentes()));
 
-        textViewTituloResultado.setText(textViewTituloResultado.getText().toString().concat(" - R$ ").concat(dados.getVrResultado().toString()));
+        if (dados.getDtContratacao() != null) {
+
+            this.textViewDtContratacao.setText(StringUtil.formatDateToString(dados.getDtContratacao()));
+        }
+        if (dados.getDtDesligamento() != null) {
+            this.textViewDtDesligamento.setText(StringUtil.formatDateToString(dados.getDtDesligamento()));
+        }
+
+        this.textViewMotivo.setText(MotivoEnum.getDeMotivoByCodigo(dados.getIcMotivo()));
+        this.textViewAviso.setText(AvisoPrevioEnum.getDeAvisoPrevisoByCodigo(dados.getIcAviso()));
+
+        this.textViewFeriasVencidas.setText(StringUtil.formatNumberToString(dados.getVrDiasFeriasVencidas()));
+        this.textViewVrSaldoFgts.setText(StringUtil.formatNumberToString(dados.getVrSaldoFgts()));
+
+        this.textViewTituloResultado.setText(this.textViewTituloResultado.getText().toString().concat(" - R$ ").concat(dados.getVrResultado().toString()));
     }
 
     private void atribuirValoresEmTelaFerias(final CalculadoraTO dados) {
 
-        textViewHrExtra.setText(dados.getVrHrsExtras().toString());
-        textViewDiasUsufruidos.setText(dados.getVrDiasFerias().toString());
+        this.textViewHrExtra.setText(StringUtil.formatNumberToString(dados.getVrHrsExtras()));
+        this.textViewDiasUsufruidos.setText(StringUtil.formatNumberToString(dados.getVrDiasFerias()));
 
         if (dados.getIcAbonoPecuniario()) {
-            textViewAbonoPecuniario.setText(R.string.label_sim);
+            this.textViewAbonoPecuniario.setText(R.string.label_sim);
         } else {
-            textViewAbonoPecuniario.setText(R.string.label_nao);
+            this.textViewAbonoPecuniario.setText(R.string.label_nao);
         }
 
-        textViewVrFerias.setText(dados.getVrFerias().toString());
-        textViewVrFeriasTerco.setText(dados.getVrAdicionalFerias().toString());
-        textViewVrAbono.setText(dados.getVrAbono().toString());
-        textViewVrAbonoAdicional.setText(dados.getVrAdicionalAbono().toString());
+        this.textViewVrFerias.setText(StringUtil.formatNumberToString(dados.getVrFerias()));
+        this.textViewVrFeriasTerco.setText(StringUtil.formatNumberToString(dados.getVrAdicionalFerias()));
+        this.textViewVrAbono.setText(StringUtil.formatNumberToString(dados.getVrAbono()));
+        this.textViewVrAbonoAdicional.setText(StringUtil.formatNumberToString(dados.getVrAdicionalAbono()));
 
-        atribuirValoresComunsEmTela(dados);
+        this.atribuirValoresComunsEmTela(dados);
     }
 
     private void atribuirValoresEmTelaSalLiquido(final CalculadoraTO dados) {
 
-        textViewVrPensao.setText(dados.getVrPensaoAlimenticia().toString());
-        textViewVrPlanoSaude.setText(dados.getVrPlanoSaude().toString());
-        textViewVrOutrosDescontos.setText(dados.getVrOutrosDescontos().toString());
-        textViewDescOutrosDescontos.setText(dados.getVrTotalOutrosDescontos().toString());
-        textViewProventoSalBruto.setText(dados.getVrSalBruto().toString());
+        this.textViewVrPensao.setText(StringUtil.formatNumberToString(dados.getVrPensaoAlimenticia()));
+        this.textViewVrPlanoSaude.setText(StringUtil.formatNumberToString(dados.getVrPlanoSaude()));
+        this.textViewVrOutrosDescontos.setText(StringUtil.formatNumberToString(dados.getVrOutrosDescontos()));
+        this.textViewDescOutrosDescontos.setText(StringUtil.formatNumberToString(dados.getVrTotalOutrosDescontos()));
+        this.textViewProventoSalBruto.setText(StringUtil.formatNumberToString(dados.getVrSalBruto()));
 
-        atribuirValoresComunsEmTela(dados);
+        this.atribuirValoresComunsEmTela(dados);
     }
 
     private void atribuirValoresComunsEmTela(CalculadoraTO dados) {
-        textViewVrSalBruto.setText(dados.getVrSalBruto().toString());
-        textViewNumDependentes.setText(dados.getNumDependentes().toString());
+        this.textViewVrSalBruto.setText(StringUtil.formatNumberToString(dados.getVrSalBruto()));
+        this.textViewNumDependentes.setText(StringUtil.formatNumberToString(dados.getNumDependentes()));
 
-        textViewTituloResultado.setText(textViewTituloResultado.getText().toString().concat(" - R$ ").concat(dados.getVrResultado().toString()));
+        this.textViewTituloResultado.setText(this.textViewTituloResultado.getText().toString().concat(" - R$ ").concat(StringUtil.formatNumberToString(dados.getVrResultado())));
 
-        textViewInssVal.setText(dados.getVrInss().toString());
-        textViewIrrfVal.setText(dados.getVrIrrf().toString());
+        this.textViewInssVal.setText(StringUtil.formatNumberToString(dados.getVrInss()));
+        this.textViewIrrfVal.setText(StringUtil.formatNumberToString(dados.getVrIrrf()));
     }
-
 }

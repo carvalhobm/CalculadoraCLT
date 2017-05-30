@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.brunocarvalho.calculadoraclt.ResultActivity"
+    tools:showIn="@layout/activity_result_rescisao">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"
+        tools:layout_editor_absoluteX="172dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/text_view_titulo_valores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_valores_informados"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="parent" />
+
+    <!-- First Row-->
+    <TextView
+        android:id="@+id/text_view_sal_bruto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/sal_bruto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_titulo_valores" />
+
+    <TextView
+        android:id="@+id/text_view_sal_bruto_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_sal_bruto"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto" />
+
+    <TextView
+        android:id="@+id/text_view_dependentes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dependentes"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_view_sal_bruto" />
+
+    <TextView
+        android:id="@+id/text_view_dependentes_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dependentes"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dependentes" />
+
+    <!-- Second Row-->
+    <TextView
+        android:id="@+id/text_view_dt_contratacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/dt_contratacao"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_sal_bruto_val" />
+
+    <TextView
+        android:id="@+id/text_view_dt_contratacao_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dt_contratacao"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dt_contratacao" />
+
+    <TextView
+        android:id="@+id/text_view_dt_demissao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dt_demissao"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_view_dt_contratacao" />
+
+    <TextView
+        android:id="@+id/text_view_dt_demissao_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_dt_demissao"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dt_demissao" />
+
+    <!-- Third Row-->
+    <TextView
+        android:id="@+id/text_view_ferias_vencidas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/ferias_vencidas"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_dt_contratacao_val" />
+
+    <TextView
+        android:id="@+id/text_view_ferias_vencidas_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_ferias_vencidas"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_ferias_vencidas" />
+
+
+    <TextView
+        android:id="@+id/text_view_saldo_fgts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/saldo_fgts"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/text_view_ferias_vencidas" />
+
+    <TextView
+        android:id="@+id/text_view_saldo_fgts_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_saldo_fgts"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_saldo_fgts" />
+
+    <!-- Forth Row -->
+    <TextView
+        android:id="@+id/text_view_motivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/motivo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_ferias_vencidas_val" />
+
+    <TextView
+        android:id="@+id/text_view_motivo_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_motivo"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_motivo" />
+
+    <!-- Fifth row -->
+    <TextView
+        android:id="@+id/text_view_aviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/aviso_previo"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_motivo_val" />
+
+    <TextView
+        android:id="@+id/text_view_aviso_val"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_aviso"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_aviso" />
+
+    <!-- Liquido a Receber -->
+    <TextView
+        android:id="@+id/text_view_titulo_resultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="@string/label_resultado"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/title_label"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@+id/text_view_titulo_valores"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_aviso_val" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,181 +1,174 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     tools:context="com.brunocarvalho.calculadoraclt.fragments.RescisaoFragment">
 
-    <ScrollView
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/linearLayoutCompat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
-        <android.support.v7.widget.LinearLayoutCompat
-            android:id="@+id/linearLayoutCompat"
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/rescisao"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/title_label"
+            android:textStyle="bold" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_salario_bruto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_text_salario_bruto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sal_bruto_cifra"
+                android:inputType="numberDecimal" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_dt_contratacao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_text_dt_contratacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_salario_bruto"
+                android:hint="@string/dt_contratacao" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_dt_demissao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_text_dt_demissao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/input_layout_dt_contratacao"
+                android:hint="@string/dt_demissao" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_motivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- DropDown Motivo-->
+            <EditText
+                android:id="@+id/edit_text_motivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/motivo"
+                android:prompt="@string/motivo" />
+
+            <Spinner
+                android:id="@+id/spinner_motivo"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:spinnerMode="dialog"
+                android:visibility="invisible" />
+        </android.support.design.widget.TextInputLayout>
+
+        <!-- DropDown Aviso previo -->
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_aviso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- DropDown Motivo-->
+            <EditText
+                android:id="@+id/edit_text_aviso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/aviso_previo"
+                android:prompt="@string/aviso_previo" />
+
+            <Spinner
+                android:id="@+id/spinner_aviso"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:spinnerMode="dialog"
+                android:visibility="invisible" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_dependentes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_text_dependentes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/dependentes"
+                android:inputType="number" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/input_layout_saldo_fgts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/edit_text_saldo_fgts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/saldo_fgts"
+                android:inputType="numberDecimal" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp">
+            android:layout_marginLeft="5dp"
+            android:columnCount="2">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/rescisao"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/title_label"
-                android:textStyle="bold" />
+                android:labelFor="@+id/switch_abono_pecuniario"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp"
+                android:text="@string/ferias_ano_anterior" />
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_salario_bruto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/input_salario_bruto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/sal_bruto_cifra"
-                    android:inputType="numberDecimal" />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_dt_contratacao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/edit_text_dt_contratacao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/input_layout_salario_bruto"
-                    android:hint="@string/dt_contratacao" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_dt_demissao"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/edit_text_dt_demissao"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_below="@+id/input_layout_dt_contratacao"
-                    android:hint="@string/dt_demissao" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_motivo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!-- DropDown Motivo-->
-                <EditText
-                    android:id="@+id/edit_text_motivo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/motivo"
-                    android:prompt="@string/motivo" />
-
-                <Spinner
-                    android:id="@+id/spinner_motivo"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:spinnerMode="dialog"
-                    android:visibility="invisible" />
-            </android.support.design.widget.TextInputLayout>
-
-            <!-- DropDown Aviso previo -->
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_aviso"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <!-- DropDown Motivo-->
-                <EditText
-                    android:id="@+id/edit_text_aviso"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/aviso_previo"
-                    android:prompt="@string/aviso_previo" />
-
-                <Spinner
-                    android:id="@+id/spinner_aviso"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:spinnerMode="dialog"
-                    android:visibility="invisible" />
-            </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_dependentes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/input_dependentes"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/dependentes"
-                    android:inputType="number" />
-
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/input_layout_saldo_fgts"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:id="@+id/input_saldo_fgts"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/saldo_fgts"
-                    android:inputType="numberDecimal" />
-
-            </android.support.design.widget.TextInputLayout>
-
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:columnCount="2">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:labelFor="@+id/switch_abono_pecuniario"
-                    android:paddingRight="20dp"
-                    android:paddingTop="15dp"
-                    android:text="@string/ferias_ano_anterior" />
-
-                <Switch
-                    android:id="@+id/switch_ferias_ano_anterior"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </GridLayout>
-
-            <Button
-                android:id="@+id/btn_calcular_rescisao"
-                style="?android:attr/borderlessButtonStyle"
+            <Switch
+                android:id="@+id/switch_ferias_ano_anterior"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_calcular"
-                android:textColor="@color/colorPrimary" />
+                android:layout_height="wrap_content" />
 
-        </android.support.v7.widget.LinearLayoutCompat>
-    </ScrollView>
+        </GridLayout>
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_calcular_rescisao"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_calcular"
+            android:textColor="@color/colorPrimary" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+</ScrollView>

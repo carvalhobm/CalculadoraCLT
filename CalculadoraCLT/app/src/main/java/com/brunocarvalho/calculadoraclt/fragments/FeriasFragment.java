@@ -1,6 +1,5 @@
 package com.brunocarvalho.calculadoraclt.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -23,9 +21,6 @@ import com.brunocarvalho.calculadoraclt.util.ConstantsUtil;
 
 import java.math.BigDecimal;
 
-/**
- * Created by carva on 13/05/2017.
- */
 
 public class FeriasFragment extends Fragment {
 
@@ -42,8 +37,6 @@ public class FeriasFragment extends Fragment {
 
     private Button btnCalcular;
 
-    private InputMethodManager imm;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,44 +48,42 @@ public class FeriasFragment extends Fragment {
 
         final View rootView = inflater.inflate(R.layout.fragment_ferias, container, false);
 
-        findViews(rootView);
+        this.findViews(rootView);
 
-        createListeners();
+        this.createListeners();
 
-        calc = new CalculadoraImpl();
+        this.calc = new CalculadoraImpl();
 
         return rootView;
     }
 
     private void findViews(View view) {
 
-        editTextSalBruto = (EditText) view.findViewById(R.id.edit_text_salario_bruto);
-        editTextHrsExtras = (EditText) view.findViewById(R.id.edit_text_horas_extras);
-        editTextNumDependentes = (EditText) view.findViewById(R.id.edit_text_dependentes);
-        editTextDiasUsufruidos = (EditText) view.findViewById(R.id.edit_text_dias_usufruidos);
-        switchAbono = (Switch) view.findViewById(R.id.switch_abono_pecuniario);
+        this.editTextSalBruto = (EditText) view.findViewById(R.id.edit_text_salario_bruto);
+        this.editTextHrsExtras = (EditText) view.findViewById(R.id.edit_text_horas_extras);
+        this.editTextNumDependentes = (EditText) view.findViewById(R.id.edit_text_dependentes);
+        this.editTextDiasUsufruidos = (EditText) view.findViewById(R.id.edit_text_dias_usufruidos);
+        this.switchAbono = (Switch) view.findViewById(R.id.switch_abono_pecuniario);
 
-        textInputDiasUsufruidos = (TextInputLayout) view.findViewById(R.id.input_layout_dias_usufruidos);
-        textInputSalBruto = (TextInputLayout) view.findViewById(R.id.input_layout_salario_bruto);
+        this.textInputDiasUsufruidos = (TextInputLayout) view.findViewById(R.id.input_layout_dias_usufruidos);
+        this.textInputSalBruto = (TextInputLayout) view.findViewById(R.id.input_layout_salario_bruto);
 
-        btnCalcular = (Button) view.findViewById(R.id.btn_calcular_ferias);
-
-        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        this.btnCalcular = (Button) view.findViewById(R.id.btn_calcular_ferias);
     }
 
     private void createListeners() {
         // Button Calcular
-        btnCalcular.setOnClickListener(new View.OnClickListener() {
+        this.btnCalcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final CalculadoraTO dados = obterValores();
+                final CalculadoraTO dados = FeriasFragment.this.obterValores();
 
-                if (validInput(dados)) {
-                    calc.calcularFerias(dados);
-                    Intent intent = new Intent(getActivity(), ResultActivity.class);
+                if (FeriasFragment.this.validInput(dados)) {
+                    FeriasFragment.this.calc.calcularFerias(dados);
+                    Intent intent = new Intent(FeriasFragment.this.getActivity(), ResultActivity.class);
                     intent.putExtra(ConstantsUtil.RESULTADO, dados);
 
-                    startActivity(intent);
+                    FeriasFragment.this.startActivity(intent);
                 }
 
             }
@@ -103,12 +94,12 @@ public class FeriasFragment extends Fragment {
         Boolean isInputValid = Boolean.TRUE;
 
         if (dados.getVrSalBruto() == null || dados.getVrSalBruto().compareTo(BigDecimal.ZERO) <= 0) {
-            textInputSalBruto.setError(getString(R.string.sal_bruto_invalido));
+            this.textInputSalBruto.setError(this.getString(R.string.sal_bruto_invalido));
             isInputValid = Boolean.FALSE;
         }
 
         if (dados.getVrDiasFerias() == null || dados.getVrDiasFerias() <= 0) {
-            textInputDiasUsufruidos.setError(getString(R.string.dias_usufruidos_invalido));
+            this.textInputDiasUsufruidos.setError(this.getString(R.string.dias_usufruidos_invalido));
             isInputValid = Boolean.FALSE;
         }
 
@@ -120,11 +111,11 @@ public class FeriasFragment extends Fragment {
 
         dados.setTituloResultado(ConstantsUtil.FERIAS);
 
-        dados.setVrSalBruto(editTextSalBruto.getText().toString());
-        dados.setVrHrsExtras(editTextHrsExtras.getText().toString());
-        dados.setNumDependentes(editTextNumDependentes.getText().toString());
-        dados.setVrDiasFerias(editTextDiasUsufruidos.getText().toString());
-        dados.setIcAbonoPecuniario(switchAbono.isChecked());
+        dados.setVrSalBruto(this.editTextSalBruto.getText().toString());
+        dados.setVrHrsExtras(this.editTextHrsExtras.getText().toString());
+        dados.setNumDependentes(this.editTextNumDependentes.getText().toString());
+        dados.setVrDiasFerias(this.editTextDiasUsufruidos.getText().toString());
+        dados.setIcAbonoPecuniario(this.switchAbono.isChecked());
 
         return dados;
     }

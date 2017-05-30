@@ -2,9 +2,6 @@ package com.brunocarvalho.calculadoraclt.negocio.service;
 
 import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 
-/**
- * Created by admin on 19/05/2017.
- */
 
 public interface Calculadora {
 

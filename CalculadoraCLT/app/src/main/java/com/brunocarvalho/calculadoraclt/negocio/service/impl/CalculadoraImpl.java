@@ -6,22 +6,20 @@ import com.brunocarvalho.calculadoraclt.negocio.to.CalculadoraTO;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-/**
- * Created by carva on 13/05/2017.
- */
-
 public class CalculadoraImpl implements Calculadora {
 
-    public static final BigDecimal BD_CEM = new BigDecimal("100");
-    public static final BigDecimal TRINTA_DIAS = new BigDecimal("30");
-    public static final BigDecimal TRES = new BigDecimal("3");
-    public static final int SCALE = 2;
-    public static final int SCALE_DIVISOR = 10;
+    private static final BigDecimal BD_CEM = new BigDecimal("100");
+    private static final BigDecimal TRINTA_DIAS = new BigDecimal("30");
+    private static final BigDecimal TRES = new BigDecimal("3");
+    private static final int SCALE = 2;
+    private static final int SCALE_DIVISOR = 10;
 
+    @Override
     public void calcularRescisao(final CalculadoraTO dados) {
 
     }
 
+    @Override
     public void calcularFerias(final CalculadoraTO dados) {
         dados.setVrResultado(BigDecimal.ZERO);
 
@@ -29,8 +27,8 @@ public class CalculadoraImpl implements Calculadora {
 
         BigDecimal vrBase = vrSalarioBase.divide(TRINTA_DIAS, SCALE_DIVISOR, RoundingMode.CEILING).multiply(new BigDecimal(dados.getVrDiasFerias())).setScale(SCALE, RoundingMode.HALF_UP);
         BigDecimal vrAdicionalFerias = vrBase.divide(TRES, SCALE_DIVISOR, RoundingMode.HALF_UP).setScale(SCALE, RoundingMode.HALF_UP);
-        BigDecimal vrInss = calcularINSS(vrBase.add(vrAdicionalFerias));
-        BigDecimal vrIrrf = calcularIRRF(vrBase.add(vrAdicionalFerias), vrInss, BigDecimal.ZERO, dados.getNumDependentes());
+        BigDecimal vrInss = this.calcularINSS(vrBase.add(vrAdicionalFerias));
+        BigDecimal vrIrrf = this.calcularIRRF(vrBase.add(vrAdicionalFerias), vrInss, BigDecimal.ZERO, dados.getNumDependentes());
         BigDecimal vrAbonoPecuniario = BigDecimal.ZERO;
         BigDecimal vrAdicionalAbonoPecuniario = BigDecimal.ZERO;
 
@@ -53,11 +51,12 @@ public class CalculadoraImpl implements Calculadora {
         dados.setVrResultado(proventos.subtract(descontos).setScale(SCALE, RoundingMode.HALF_UP));
     }
 
+    @Override
     public void calcularSalarioLiquido(final CalculadoraTO dados) {
         dados.setVrResultado(BigDecimal.ZERO);
 
-        dados.setVrInss(calcularINSS(dados.getVrSalBruto()));
-        dados.setVrIrrf(calcularIRRF(dados.getVrSalBruto(), dados.getVrInss(), dados.getVrPensaoAlimenticia(), dados.getNumDependentes()));
+        dados.setVrInss(this.calcularINSS(dados.getVrSalBruto()));
+        dados.setVrIrrf(this.calcularIRRF(dados.getVrSalBruto(), dados.getVrInss(), dados.getVrPensaoAlimenticia(), dados.getNumDependentes()));
 
         final BigDecimal vrDescontos = dados.getVrInss().add(dados.getVrIrrf()).add(dados.getVrPensaoAlimenticia()).add(dados.getVrPlanoSaude()).add(dados.getVrOutrosDescontos());
 

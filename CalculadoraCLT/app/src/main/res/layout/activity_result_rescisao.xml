@@ -26,8 +26,8 @@
         android:paddingBottom="5dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/content_result_ferias" />
+        <include layout="@layout/content_result_rescisao" />
 
     </android.support.v4.widget.NestedScrollView>
-    
+
 </android.support.design.widget.CoordinatorLayout>

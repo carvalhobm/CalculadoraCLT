@@ -9,11 +9,12 @@
     <!-- Rescisao -->
     <string name="rescisao">Rescisão</string>
     <string name="dt_contratacao">Data de contratação</string>
-    <string name="dt_demissao">Data de demissão</string>
+    <string name="dt_demissao">Data de desligamento</string>
     <string name="motivo">Motivo</string>
     <string name="aviso_previo">Aviso prévio</string>
     <string name="saldo_fgts">Saldo FGTS</string>
     <string name="ferias_ano_anterior">Possui férias do ano anterior?</string>
+    <string name="ferias_vencidas">Férias vencidas</string>
 
     <!-- Ferias -->
     <string name="ferias">Férias</string>
@@ -44,7 +45,7 @@
     <string name="dependentes">Dependentes</string>
     <string name="cifra">(R$)</string>
     <string name="label_calcular">Calcular</string>
-    <string name="label_resultado">Resultado</string>
+    <string name="label_resultado">Líquido a receber</string>
     <string name="descontos">Descontos</string>
     <string name="proventos">Proventos</string>
     <string name="label_inss">INSS (R$)</string>

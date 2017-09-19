@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.brunocarvalho.calculadoraclt.fragments.FeriasFragment;
+import com.brunocarvalho.calculadoraclt.fragments.RescisaoFragment;
 import com.brunocarvalho.calculadoraclt.fragments.SalLiquidoFragment;
 
 import java.util.ArrayList;
@@ -35,9 +36,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(this.getSupportFragmentManager());
-        //adapter.addFragment(new RescisaoFragment(), "Rescisão");
-        adapter.addFragment(new FeriasFragment(), "Férias");
         adapter.addFragment(new SalLiquidoFragment(), "Sal. Líquido");
+        adapter.addFragment(new FeriasFragment(), "Férias");
+        adapter.addFragment(new RescisaoFragment(), "Rescisão");
         viewPager.setAdapter(adapter);
     }
 
